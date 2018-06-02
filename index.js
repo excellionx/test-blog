@@ -1,5 +1,4 @@
-'
-use strict';
+'use strict';
 
 var express = require('express'),
  bodyParser = require('body-parser');
@@ -18,7 +17,7 @@ let postSchema = {
 
 var blogRealm = new Realm({
 	path: 'blog.realm',
-	schema: [PostSchema]
+	schema: [postSchema]
 });
 
 app.use(bodyParser.urlencoded({extended: true}));
@@ -29,9 +28,9 @@ app.post('/write', function(req, res) {
 	content = req.body['content'],
 	timestamp = new Date();
 	blogRealm.write(() => {
-	 blogRealnm.create('Post', {title: title, content: content, timestamp: timestamp});
+	 blogRealm.create('Post', {title: title, content: content, timestamp: timestamp});
 	});
-	res.sendFile(__dirName + "/write-complete.html");
+	res.sendFile(__dirname + "/write-complete.html");
 });
 
 app.get('/', function(req, res){
